@@ -6,8 +6,8 @@ export default function Home() {
     <main className="flex items-center justify-center flex-1 gap-15 flex-col text-white">
       {/* Nav Links */}
       <div className="flex gap-10 text-sm text-bg-light-text">
-        <Link href={""} className="hover:text-white transition-colors duration-300">Contact</Link>
-        <Link href={""} className="hover:text-white transition-colors duration-300">Projects</Link>
+        <Link href={"/contact"} className="hover:text-white transition-colors duration-300">Contact</Link>
+        <Link href={"/projects"} className="hover:text-white transition-colors duration-300">Projects</Link>
       </div>
       <h1 className={`text-9xl ${fontSecondary.className}`}>
         Nerdboi

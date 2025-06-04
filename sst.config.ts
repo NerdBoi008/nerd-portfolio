@@ -1,8 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="./.sst/platform/config.d.ts" />
 
-import * as aws from "@pulumi/aws";
-
 export default $config({
   app(input) {
     return {
@@ -14,6 +12,9 @@ export default $config({
     };
   },
   async run() {
+
+    const aws = await import("@pulumi/aws");
+
     // Configure OpenID Connect for GitHub Actions
     // This creates the IAM OIDC Provider and Role for GitHub Actions
     const github = new aws.iam.OpenIdConnectProvider("GithubProvider", {

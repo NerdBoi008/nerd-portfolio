@@ -58,9 +58,7 @@ jobs:
       - name: Configure AWS Credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          # IMPORTANT: Replace with your actual AWS Account ID and the IAM Role name
-          # This role MUST be configured in AWS IAM with the OIDC provider for GitHub Actions.
-          # (Refer to the previous explanation on setting up OIDC/IAM Role)
+          # IMPORTANT: This role MUST be configured in AWS IAM with the OIDC provider for GitHub Actions.
           role-to-assume: arn:aws:iam::311141549954:role/GitHubActionsDeployRole 
           aws-region: ap-south-1 # Your AWS Region (Mumbai), ensure this matches your SST config!
 
@@ -72,10 +70,10 @@ jobs:
 
       - name: Invalidate CloudFront Cache
         # This ensures users see the latest version of your site immediately.
-        # Replace 'yourportfolio.com' with your actual custom domain.
+        # Replace 'nerdboi.dev' with your actual custom domain.
         # Ensure your CloudFront distribution is correctly associated with this domain.
         run: |
-          DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items!=null && contains(Aliases.Items, '${{ env.YOUR_CUSTOM_DOMAIN }}')].Id | [0]" --output text)
+          DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items!=null && contains(Aliases.Items, '${{ env.CUSTOM_DOMAIN }}')].Id | [0]" --output text)
           if [ -z "$DISTRIBUTION_ID" ]; then
             echo "CloudFront Distribution ID not found for ${{ env.CUSTOM_DOMAIN }}. Skipping invalidation."
           else

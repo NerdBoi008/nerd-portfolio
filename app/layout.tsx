@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { fontPrimary } from "./fonts";
 import "./globals.css";
-import { AnimatePresence } from "framer-motion";
+import dynamic from 'next/dynamic';
 
 export const metadata: Metadata = {
   title: "Nerdboi | Full-Stack Developer Portfolio",
@@ -31,6 +31,13 @@ export const viewport: Viewport = {
   ],
 };
 
+const DynamicAnimatePresenceWrapper = dynamic(
+  () => import('../components/common/AnimatePresenceWrapper'),
+  {
+    ssr: false, // This ensures it's only rendered on the client side
+  }
+);
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,9 +48,9 @@ export default function RootLayout({
       <body
         className={`${fontPrimary.className} antialiased min-h-screen flex flex-col text-white bg-radial from-c-blue-900 from-50% to-c-blue-800`}
       >
-        <AnimatePresence mode="wait">
+        <DynamicAnimatePresenceWrapper>
           <div className="flex flex-col flex-1">{children}</div>
-        </AnimatePresence>
+        </DynamicAnimatePresenceWrapper>
       </body>
     </html>
   );

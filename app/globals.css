@@ -3,6 +3,17 @@
 
 @theme inline {
   --color-bg-light-text: oklch(0.7 0.023 268.34);
+  
+  --color-c-blue: oklch(36.14% 0.095 246.98);
+  --color-c-blue-100: oklch(33.78% 0.087 246.01);
+  --color-c-blue-200: oklch(31.11% 0.080 245.87);
+  --color-c-blue-300: oklch(29.16% 0.074 245.63);
+  --color-c-blue-400: oklch(27.10% 0.068 244.49);
+  --color-c-blue-500: oklch(25.45% 0.062 243.55);
+  --color-c-blue-600: oklch(23.76% 0.057 242.37);
+  --color-c-blue-700: oklch(20.83% 0.049 241.35);
+  --color-c-blue-800: oklch(18.59% 0.041 238.25);
+  --color-c-blue-900: oklch(16.77% 0.036 235.04);
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -49,7 +60,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(36.14% 0.095 246.98);
   /* --background: oklch(1 0 0); */
   --background: oklch(0.17 0.0356 235.04);
   --foreground: oklch(0.13 0.028 261.692);
@@ -85,7 +96,7 @@
 }
 
 .dark {
-  --background: oklch(0.13 0.028 261.692);
+  --background: oklch(0.3614 0.095 246.98);
   --foreground: oklch(0.985 0.002 247.839);
   --card: oklch(0.21 0.034 264.665);
   --card-foreground: oklch(0.985 0.002 247.839);
@@ -125,4 +136,32 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.masonry-grid {
+  display: flex;
+  width: auto;
+  margin-left: -24px; /* Adjust based on your gap preference */
+}
+
+.masonry-grid_column {
+  background-clip: padding-box;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #001a2c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #003356;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00406c;
 }

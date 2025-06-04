@@ -1,0 +1,86 @@
+name: Portfolio CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+# IMPORTANT: Grant GITHUB_TOKEN extra permissions for OIDC
+permissions:
+  id-token: write # This is required for requesting the JWT for AWS OIDC
+  contents: read # This is required for actions/checkout
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm' # Cache npm dependencies for faster builds
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Type Check
+        run: npm run type-check
+
+      - name: Lint
+        run: npm run lint
+
+  deploy:
+    needs: build-and-lint # Depends on the build-and-lint job succeeding
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Configure AWS Credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # IMPORTANT: Replace with your actual AWS Account ID and the IAM Role name
+          # This role MUST be configured in AWS IAM with the OIDC provider for GitHub Actions.
+          # (Refer to the previous explanation on setting up OIDC/IAM Role)
+          role-to-assume: arn:aws:iam::<YOUR_AWS_ACCOUNT_ID>:role/GitHubActionsDeployRole 
+          aws-region: ap-south-1 # Your AWS Region (Mumbai), ensure this matches your SST config!
+
+      - name: Deploy SST App
+        # SST's deploy command will build your Next.js app and then deploy it.
+        # This requires your 'package.json' scripts to have 'deploy:production'
+        # defined as 'npx sst deploy --stage production'.
+        run: npm run deploy:production 
+
+      - name: Invalidate CloudFront Cache
+        # This ensures users see the latest version of your site immediately.
+        # Replace 'yourportfolio.com' with your actual custom domain.
+        # Ensure your CloudFront distribution is correctly associated with this domain.
+        run: |
+          DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items!=null && contains(Aliases.Items, '${{ env.YOUR_CUSTOM_DOMAIN }}')].Id | [0]" --output text)
+          if [ -z "$DISTRIBUTION_ID" ]; then
+            echo "CloudFront Distribution ID not found for ${{ env.YOUR_CUSTOM_DOMAIN }}. Skipping invalidation."
+          else
+            echo "Invalidating CloudFront cache for Distribution ID: $DISTRIBUTION_ID"
+            aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+          fi
+        env:
+          YOUR_CUSTOM_DOMAIN: yourportfolio.com # <-- Replace with your actual custom domain

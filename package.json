@@ -3,19 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
     "build": "next build",
+    "dev": "next dev --turbopack",
+    "lint": "next lint",
     "start": "next start",
-    "lint": "next lint"
+    "type-check": "tsc --noEmit",
+    "deploy:dev": "npx sst deploy --stage dev",
+    "deploy:production": "npx sst deploy --stage production",
+    "remove:dev": "npx sst remove --stage dev",
+    "remove:production": "npx sst remove --stage production"
   },
   "dependencies": {
+    "@pulumi/aws": "^6.81.0",
+    "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.487.0",
-    "motion": "^12.6.3",
+    "motion": "^12.15.0",
     "next": "^15.3.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-masonry-css": "^1.0.16",
+    "sst": "3.17.0",
     "tailwind-merge": "^3.1.0",
     "tw-animate-css": "^1.2.5"
   },

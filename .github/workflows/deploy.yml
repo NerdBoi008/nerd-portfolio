@@ -61,7 +61,7 @@ jobs:
           # IMPORTANT: Replace with your actual AWS Account ID and the IAM Role name
           # This role MUST be configured in AWS IAM with the OIDC provider for GitHub Actions.
           # (Refer to the previous explanation on setting up OIDC/IAM Role)
-          role-to-assume: arn:aws:iam::<YOUR_AWS_ACCOUNT_ID>:role/GitHubActionsDeployRole 
+          role-to-assume: arn:aws:iam::311141549954:role/GitHubActionsDeployRole 
           aws-region: ap-south-1 # Your AWS Region (Mumbai), ensure this matches your SST config!
 
       - name: Deploy SST App
@@ -77,10 +77,10 @@ jobs:
         run: |
           DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items!=null && contains(Aliases.Items, '${{ env.YOUR_CUSTOM_DOMAIN }}')].Id | [0]" --output text)
           if [ -z "$DISTRIBUTION_ID" ]; then
-            echo "CloudFront Distribution ID not found for ${{ env.YOUR_CUSTOM_DOMAIN }}. Skipping invalidation."
+            echo "CloudFront Distribution ID not found for ${{ env.CUSTOM_DOMAIN }}. Skipping invalidation."
           else
             echo "Invalidating CloudFront cache for Distribution ID: $DISTRIBUTION_ID"
             aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
           fi
         env:
-          YOUR_CUSTOM_DOMAIN: yourportfolio.com # <-- Replace with your actual custom domain
+          CUSTOM_DOMAIN: nerdboi.dev # <-- Replace with your actual custom domain

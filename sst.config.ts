@@ -20,9 +20,7 @@ export default $config({
       thumbprintLists: ["d89e3bd43d5d909b47a18977aa9d5ce36cee184c"],
     });
 
-    new aws.iam.Role(
-      "GithubActionsDeployRole",
-      {
+    new aws.iam.Role( "GithubActionsDeployRole", {
         assumeRolePolicy: {
           Version: "2012-10-17",
           Statement: [
@@ -34,17 +32,18 @@ export default $config({
               Action: "sts:AssumeRoleWithWebIdentity",
               Condition: {
                 StringLike: {
-                  [`${github.url}:sub`]: `repo:${process.env.GITHUB_REPOSITORY}:*`,
+                  // Ensure this matches your GitHub repo name and allows any ref
+                  [`${github.url}:sub`]: `repo:NerdBoi008/nerd-portfolio:*`,
+                  // This part for 'aud' is often automatically handled by aws-actions/configure-aws-credentials,
+                  // but it's good to explicitly include it for clarity if the error suggested it.
+                  [`${github.url}:aud`]: "sts.amazonaws.com",
                 },
               },
             },
           ],
         },
-        // You can scope down permissions for production
-        // For a portfolio, AdministratorAccess is fine for simplicity, but best practice is least privilege.
-        managedPolicyArns: [
-          "arn:aws:iam::aws:policy/AdministratorAccess", // Replace with more specific policies for production
-        ],
+        managedPolicyArns: ["arn:aws:iam::311141549954:policy/SST-Policy"],
+        permissionsBoundary: "arn:aws:iam::311141549954:policy/SST-Policy",
       },
       {
         import: "GitHubActionsDeployRole",

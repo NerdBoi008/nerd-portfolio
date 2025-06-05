@@ -47,7 +47,7 @@ export default $config({
         ],
       },
       {
-        import: "arn:aws:iam::311141549954:role/GitHubActionsDeployRole",
+        import: "GitHubActionsDeployRole",
       }
     );
 

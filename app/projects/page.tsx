@@ -7,48 +7,49 @@ import { Project } from "@/types";
 import React from "react";
 import Masonry from "react-masonry-css";
 
-export const projects: Project[] = [
-  {
-    id: 1,
-    title: "Portfolio Website",
-    description:
-      "A personal portfolio website built with Next.js and TailwindCSS",
-    technologies: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn/ui"],
-    githubUrl: "https://github.com/yourusername/portfolio",
-    liveUrl: "https://your-portfolio.com",
-    imageUrl: "/projects/portfolio.png",
-  },
-  {
-    id: 2,
-    title: "E-commerce Platform",
-    description:
-      "Full-stack e-commerce application with payment integration Full-stack e-commerce application with payment integration Full-stack e-commerce application with payment integration Full-stack e-commerce application with payment integration ",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe", "Redux"],
-    githubUrl: "https://github.com/yourusername/ecommerce",
-    liveUrl: "https://your-shop.com",
-    imageUrl: "/projects/ecommerce.png",
-  },
-  {
-    id: 3,
-    title: "Task Manager",
-    description: "A collaborative task management tool with real-time updates",
-    technologies: ["React", "Firebase", "Material-UI", "Redux"],
-    githubUrl: "https://github.com/yourusername/task-manager",
-    liveUrl: "https://your-tasks.com",
-    imageUrl: "/projects/taskmanager.png",
-  },
-  {
-    id: 4,
-    title: "Weather Dashboard",
-    description: "Real-time weather application using OpenWeather API",
-    technologies: ["React", "TypeScript", "Axios", "Chart.js"],
-    githubUrl: "https://github.com/yourusername/weather-app",
-    liveUrl: "https://your-weather.com",
-    imageUrl: "/projects/weather.png",
-  },
-];
+export default function ProjectsPage() {
+  const projects: Project[] = [
+    {
+      id: 1,
+      title: "Portfolio Website",
+      description:
+        "A personal portfolio website built with Next.js and TailwindCSS",
+      technologies: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn/ui"],
+      githubUrl: "https://github.com/yourusername/portfolio",
+      liveUrl: "https://your-portfolio.com",
+      imageUrl: "/projects/portfolio.png",
+    },
+    {
+      id: 2,
+      title: "E-commerce Platform",
+      description:
+        "Full-stack e-commerce application with payment integration Full-stack e-commerce application with payment integration Full-stack e-commerce application with payment integration Full-stack e-commerce application with payment integration ",
+      technologies: ["React", "Node.js", "MongoDB", "Stripe", "Redux"],
+      githubUrl: "https://github.com/yourusername/ecommerce",
+      liveUrl: "https://your-shop.com",
+      imageUrl: "/projects/ecommerce.png",
+    },
+    {
+      id: 3,
+      title: "Task Manager",
+      description:
+        "A collaborative task management tool with real-time updates",
+      technologies: ["React", "Firebase", "Material-UI", "Redux"],
+      githubUrl: "https://github.com/yourusername/task-manager",
+      liveUrl: "https://your-tasks.com",
+      imageUrl: "/projects/taskmanager.png",
+    },
+    {
+      id: 4,
+      title: "Weather Dashboard",
+      description: "Real-time weather application using OpenWeather API",
+      technologies: ["React", "TypeScript", "Axios", "Chart.js"],
+      githubUrl: "https://github.com/yourusername/weather-app",
+      liveUrl: "https://your-weather.com",
+      imageUrl: "/projects/weather.png",
+    },
+  ];
 
-const ProjectPage = () => {
   const breakpointColumnsObj = {
     default: 3,
     1100: 2,
@@ -76,6 +77,4 @@ const ProjectPage = () => {
       </main>
     </PageTransition>
   );
-};
-
-export default ProjectPage;
+}

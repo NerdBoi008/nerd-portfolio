@@ -33,6 +33,11 @@ export default $config({
             },
             Action: "sts:AssumeRoleWithWebIdentity",
             Condition: {
+              // This is the crucial change: 'StringEquals' for the 'aud' claim
+              StringEquals: {
+                [`${github.url}:aud`]: "sts.amazonaws.com",
+              },
+              // And 'StringLike' for the 'sub' claim (repository path)
               StringLike: {
                 [`${github.url}:sub`]: `repo:${process.env.GITHUB_REPOSITORY}:*`,
               },

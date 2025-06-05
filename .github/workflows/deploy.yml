@@ -2,9 +2,9 @@ name: Portfolio CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 # IMPORTANT: Grant GITHUB_TOKEN extra permissions for OIDC
@@ -13,12 +13,12 @@ permissions:
   contents: read # This is required for actions/checkout
 
 env:
-  NODE_VERSION: '20.x'
+  NODE_VERSION: "20.x"
 
 jobs:
   build-and-lint:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm' # Cache npm dependencies for faster builds
+          cache: "npm" # Cache npm dependencies for faster builds
 
       - name: Install Dependencies
         run: npm ci
@@ -37,12 +37,23 @@ jobs:
 
       - name: Lint
         run: npm run lint
+      
+        # Build static export to verify it works
+      - name: Build Static Export
+        run: npm run build
+
+      # Verify static build output
+      - name: Verify Static Build
+        run: |
+          echo "Checking static build output..."
+          ls -la out/
+          echo "Static build completed successfully"
 
   deploy:
     needs: build-and-lint # Depends on the build-and-lint job succeeding
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
       - uses: actions/checkout@v4
 
@@ -50,7 +61,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install Dependencies
         run: npm ci
@@ -59,14 +70,14 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           # IMPORTANT: This role MUST be configured in AWS IAM with the OIDC provider for GitHub Actions.
-          role-to-assume: arn:aws:iam::311141549954:role/GitHubActionsDeployRole 
+          role-to-assume: arn:aws:iam::311141549954:role/GitHubActionsDeployRole
           aws-region: ap-south-1 # Your AWS Region (Mumbai), ensure this matches your SST config!
 
       - name: Deploy SST App
         # SST's deploy command will build your Next.js app and then deploy it.
         # This requires your 'package.json' scripts to have 'deploy:production'
         # defined as 'npx sst deploy --stage production'.
-        run: npm run deploy:production 
+        run: npm run deploy:production
 
       - name: Invalidate CloudFront Cache
         # This ensures users see the latest version of your site immediately.

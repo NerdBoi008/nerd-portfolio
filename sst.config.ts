@@ -9,11 +9,6 @@ export default $config({
       protect: ["production"].includes(input?.stage),
       home: "aws",
       region: "ap-south-1",
-      providers: {
-        aws: {
-          profile: input?.stage === "staging" ? "staging" : "default"
-        }
-      }
     };
   },
   async run() {

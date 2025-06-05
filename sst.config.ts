@@ -17,6 +17,7 @@ export default $config({
     const github = new aws.iam.OpenIdConnectProvider("GithubProvider", {
       url: "https://token.actions.githubusercontent.com",
       clientIdLists: ["sts.amazonaws.com"],
+      thumbprintLists: ['d89e3bd43d5d909b47a18977aa9d5ce36cee184c'],
     });
 
     new aws.iam.Role("GithubActionsDeployRole", {

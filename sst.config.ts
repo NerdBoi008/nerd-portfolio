@@ -18,6 +18,8 @@ export default $config({
       url: "https://token.actions.githubusercontent.com",
       clientIdLists: ["sts.amazonaws.com"],
       thumbprintLists: ['d89e3bd43d5d909b47a18977aa9d5ce36cee184c'],
+    }, {
+      import: "arn:aws:iam::311141549954:oidc-provider/token.actions.githubusercontent.com"
     });
 
     new aws.iam.Role("GithubActionsDeployRole", {

@@ -45,11 +45,15 @@ export default $config({
       ],
     });
 
-    new sst.aws.StaticSite("nerdboi-portfolio-site", {
+    const site = new sst.aws.StaticSite("nerdboi-portfolio-site", {
       domain: {
         name: "nerdboi.dev",
         aliases: ["www.nerdboi.dev"]
       }
+    })
+
+    $output({
+      website_custom_domain: site.url,
     })
   },
 });

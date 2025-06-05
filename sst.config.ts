@@ -17,34 +17,34 @@ export default $config({
 
     // Configure OpenID Connect for GitHub Actions
     // This creates the IAM OIDC Provider and Role for GitHub Actions
-    // const github = new aws.iam.OpenIdConnectProvider("GithubProvider", {
-    //   url: "https://token.actions.githubusercontent.com",
-    //   clientIdLists: ["sts.amazonaws.com"],
-    //   thumbprintLists: ['d89e3bd43d5d909b47a18977aa9d5ce36cee184c']
-    // });
+    const github = new aws.iam.OpenIdConnectProvider("GithubProvider", {
+      url: "https://token.actions.githubusercontent.com",
+      clientIdLists: ["sts.amazonaws.com"],
+      thumbprintLists: ['d89e3bd43d5d909b47a18977aa9d5ce36cee184c']
+    });
 
-    // new aws.iam.Role("GithubActionsDeployRole", {
-    //   assumeRolePolicy: {
-    //     Version: "2012-10-17",
-    //     Statement: [
-    //       {
-    //         Effect: "Allow",
-    //         Principal: {
-    //           Federated: github.arn,
-    //         },
-    //         Action: "sts:AssumeRoleWithWebIdentity",
-    //         Condition: {
-    //           StringLike: {
-    //             [`${github.url}:sub`]: `repo:${process.env.GITHUB_REPOSITORY}:*`,
-    //           },
-    //         },
-    //       },
-    //     ],
-    //   },
-    //   managedPolicyArns: [
-    //     "arn:aws:iam::311141549954:policy/SST-Policy",
-    //   ],
-    // });
+    new aws.iam.Role("GithubActionsDeployRole", {
+      assumeRolePolicy: {
+        Version: "2012-10-17",
+        Statement: [
+          {
+            Effect: "Allow",
+            Principal: {
+              Federated: github.arn,
+            },
+            Action: "sts:AssumeRoleWithWebIdentity",
+            Condition: {
+              StringLike: {
+                [`${github.url}:sub`]: `repo:${process.env.GITHUB_REPOSITORY}:*`,
+              },
+            },
+          },
+        ],
+      },
+      managedPolicyArns: [
+        "arn:aws:iam::311141549954:policy/SST-Policy",
+      ],
+    });
 
     const site = new sst.aws.StaticSite("nerdboi-portfolio-site", {
       domain: {

@@ -45,7 +45,7 @@ export default $config({
       ],
     });
 
-    new sst.aws.Nextjs("nerdboi-portfolio-site", {
+    new sst.aws.StaticSite("nerdboi-portfolio-site", {
       domain: {
         name: "nerdboi.dev",
         aliases: ["www.nerdboi.dev"]

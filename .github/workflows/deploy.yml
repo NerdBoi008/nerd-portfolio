@@ -37,17 +37,6 @@ jobs:
 
       - name: Lint
         run: npm run lint
-      
-        # Build static export to verify it works
-      - name: Build Static Export
-        run: npm run build
-
-      # Verify static build output
-      - name: Verify Static Build
-        run: |
-          echo "Checking static build output..."
-          ls -la out/
-          echo "Static build completed successfully"
 
   deploy:
     needs: build-and-lint # Depends on the build-and-lint job succeeding
@@ -65,6 +54,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+
+      - name: Build Next.js App
+        run: npm run build
 
       - name: Configure AWS Credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v4

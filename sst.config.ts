@@ -15,14 +15,29 @@ export default $config({
 
     const aws = await import("@pulumi/aws");
 
-    // Configure OpenID Connect for GitHub Actions
-    // This creates the IAM OIDC Provider and Role for GitHub Actions
+    let deployRole: aws.iam.Role;
+  try {
+    const existingRole = await aws.iam.getRole({ name: "YourPreExistingDeployRoleName" });
+    const attachedPolicies = new aws.iam.RolePolicyAttachment("ExistingRolePolicies", { 
+      role: existingRole.name,
+      policyArn: "arn:aws:iam::311141549954:policy/SST-Policy"
+    });
+    deployRole = new aws.iam.Role("ExistingDeployRole", {
+      name: existingRole.name,
+      assumeRolePolicy: existingRole.assumeRolePolicy,
+      path: existingRole.path,
+      managedPolicyArns: [attachedPolicies.policyArn],
+    });
+    console.log("Using existing deploy role:", deployRole.arn);
+  } catch (e) {
+    // If the role doesn't exist, create it
+    console.log("Pre-existing deploy role not found, creating new one.");
     const github = new aws.iam.OpenIdConnectProvider("GithubProvider", {
       url: "https://token.actions.githubusercontent.com",
       clientIdLists: ["sts.amazonaws.com"],
     });
 
-    new aws.iam.Role("GithubActionsDeployRole", {
+    deployRole = new aws.iam.Role("GithubActionsDeployRole", {
       assumeRolePolicy: {
         Version: "2012-10-17",
         Statement: [
@@ -33,11 +48,9 @@ export default $config({
             },
             Action: "sts:AssumeRoleWithWebIdentity",
             Condition: {
-              // This is the crucial change: 'StringEquals' for the 'aud' claim
               StringEquals: {
                 [`${github.url}:aud`]: "sts.amazonaws.com",
               },
-              // And 'StringLike' for the 'sub' claim (repository path)
               StringLike: {
                 [`${github.url}:sub`]: `repo:${process.env.GITHUB_REPOSITORY}:*`,
               },
@@ -49,6 +62,7 @@ export default $config({
         "arn:aws:iam::311141549954:policy/SST-Policy",
       ],
     });
+  }
 
     const site = new sst.aws.StaticSite("nerdboi-portfolio-site", {
       domain: {

@@ -33,9 +33,6 @@ export const viewport: Viewport = {
 
 const DynamicAnimatePresenceWrapper = dynamic(
   () => import('../components/common/AnimatePresenceWrapper'),
-  {
-    ssr: false, // This ensures it's only rendered on the client side
-  }
 );
 
 export default function RootLayout({

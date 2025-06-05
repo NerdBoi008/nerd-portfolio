@@ -9,6 +9,11 @@ export default $config({
       protect: ["production"].includes(input?.stage),
       home: "aws",
       region: "ap-south-1",
+      providers: {
+        aws: {
+          profile: input?.stage === "staging" ? "staging" : "default"
+        }
+      }
     };
   },
   async run() {
@@ -17,9 +22,11 @@ export default $config({
 
     // Configure OpenID Connect for GitHub Actions
     // This creates the IAM OIDC Provider and Role for GitHub Actions
-    const existingGithubOidcProvider = aws.iam.getOpenIdConnectProviderOutput({
-    url: "https://token.actions.githubusercontent.com",
-});
+    const github = new aws.iam.OpenIdConnectProvider("GithubProvider", {
+      url: "https://token.actions.githubusercontent.com",
+      clientIdLists: ["sts.amazonaws.com"],
+      thumbprintLists: ['d89e3bd43d5d909b47a18977aa9d5ce36cee184c']
+    });
 
     new aws.iam.Role("GithubActionsDeployRole", {
       assumeRolePolicy: {
@@ -28,12 +35,12 @@ export default $config({
           {
             Effect: "Allow",
             Principal: {
-              Federated: existingGithubOidcProvider.arn,
+              Federated: github.arn,
             },
             Action: "sts:AssumeRoleWithWebIdentity",
             Condition: {
               StringLike: {
-                [`${existingGithubOidcProvider.url}:sub`]: `repo:${process.env.GITHUB_REPOSITORY}:*`,
+                [`${github.url}:sub`]: `repo:${process.env.GITHUB_REPOSITORY}:*`,
               },
             },
           },

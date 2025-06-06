@@ -14,34 +14,14 @@ export default $config({
   async run() {
     const aws = await import("@pulumi/aws");
 
-    const github = new aws.iam.OpenIdConnectProvider("GithubProvider", {
+    new aws.iam.OpenIdConnectProvider("GithubProvider", {
       url: "https://token.actions.githubusercontent.com",
       clientIdLists: ["sts.amazonaws.com"],
       thumbprintLists: ["d89e3bd43d5d909b47a18977aa9d5ce36cee184c"],
     });
 
     new aws.iam.Role( "GithubActionsDeployRole", {
-        assumeRolePolicy: {
-          Version: "2012-10-17",
-          Statement: [
-            {
-              Effect: "Allow",
-              Principal: {
-                Federated: github.arn,
-              },
-              Action: "sts:AssumeRoleWithWebIdentity",
-              Condition: {
-                StringLike: {
-                  // Ensure this matches your GitHub repo name and allows any ref
-                  [`${github.url}:sub`]: `repo:NerdBoi008/nerd-portfolio:*`,
-                  // This part for 'aud' is often automatically handled by aws-actions/configure-aws-credentials,
-                  // but it's good to explicitly include it for clarity if the error suggested it.
-                  [`${github.url}:aud`]: "sts.amazonaws.com",
-                },
-              },
-            },
-          ],
-        },
+        assumeRolePolicy: '{"Statement":[{"Action":"sts:AssumeRoleWithWebIdentity","Condition":{"StringLike":{"token.actions.githubusercontent.com:aud":"sts.amazonaws.com","token.actions.githubusercontent.com:sub":"repo:NerdBoi008/nerd-portfolio:*"}},"Effect":"Allow","Principal":{"Federated":"arn:aws:iam::311141549954:oidc-provider/token.actions.githubusercontent.com"}}],"Version":"2012-10-17"}',
         managedPolicyArns: ["arn:aws:iam::311141549954:policy/SST-Policy"],
         permissionsBoundary: "arn:aws:iam::311141549954:policy/SST-Policy",
       },

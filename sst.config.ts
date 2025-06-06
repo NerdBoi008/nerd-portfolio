@@ -25,17 +25,9 @@ export default $config({
         managedPolicyArns: ["arn:aws:iam::311141549954:policy/SST-Policy"],
         permissionsBoundary: "arn:aws:iam::311141549954:policy/SST-Policy",
       },
-      {
-        import: "GitHubActionsDeployRole",
-      }
     );
 
-    const site = new sst.aws.StaticSite("nerdboi-portfolio-site", {
-      domain: {
-        name: "nerdboi.dev",
-        aliases: ["www.nerdboi.dev"],
-      },
-    });
+    const site = new sst.aws.StaticSite("nerdboi-portfolio-site");
 
     $output({
       website_custom_domain: site.url,

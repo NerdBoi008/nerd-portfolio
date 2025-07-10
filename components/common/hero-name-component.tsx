@@ -8,7 +8,7 @@ export const HeroNameComponent = () => {
     const text = "Nerdboi";
   const number = "008"; 
   return (
-    <h1 className={`text-9xl ${fontSecondary.className}`}>
+    <h1 className={`text-6xl sm:text-8xl md:text-9xl cursor-default select-none ${fontSecondary.className}`}>
       {text.split("").map((char, index) => (
         <motion.span
           key={index}

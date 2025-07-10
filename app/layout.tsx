@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { fontPrimary } from "./fonts";
 import "./globals.css";
-import dynamic from 'next/dynamic';
+import { ParticleBackground } from "@/components/common/particles-background";
 
 export const metadata: Metadata = {
   title: "Nerdboi | Full-Stack Developer Portfolio",
@@ -31,10 +31,6 @@ export const viewport: Viewport = {
   ],
 };
 
-const DynamicAnimatePresenceWrapper = dynamic(
-  () => import('../components/common/AnimatePresenceWrapper'),
-);
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -45,9 +41,8 @@ export default function RootLayout({
       <body
         className={`${fontPrimary.className} antialiased min-h-screen flex flex-col text-white bg-radial from-c-blue-900 from-50% to-c-blue-800`}
       >
-        <DynamicAnimatePresenceWrapper>
-          <div className="flex flex-col flex-1">{children}</div>
-        </DynamicAnimatePresenceWrapper>
+        <ParticleBackground/>
+        {children}
       </body>
     </html>
   );

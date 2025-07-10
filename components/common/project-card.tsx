@@ -1,11 +1,17 @@
-import { Github, Globe } from 'lucide-react'
-import Link from 'next/link'
-import Image from 'next/image'
-import { Project } from '@/types';
+import { Github, Globe } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { Project } from "@/types";
+import { motion } from "framer-motion";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
-    <div className="bg-c-blue-800 border border-c-blue-500 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300">
+    <motion.div
+      initial={{ opacity: 0, }}
+      whileInView={{ opacity: 1, }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="bg-c-blue-800 border border-c-blue-500 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+    >
       {project.imageUrl && (
         <div className="relative h-48 w-full">
           <Image
@@ -19,7 +25,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
         <p className="text-sm text-gray-300 mb-4">{project.description}</p>
-        
+
         <div className="flex flex-wrap gap-2 mb-4">
           {project.technologies.map((tech, index) => (
             <span
@@ -56,9 +62,8 @@ const ProjectCard = ({ project }: { project: Project }) => {
           )}
         </div>
       </div>
-    </div>
-  )
-}
+    </motion.div>
+  );
+};
 
-export default ProjectCard
-
+export default ProjectCard;

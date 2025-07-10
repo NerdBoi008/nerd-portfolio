@@ -14,7 +14,21 @@
   --color-c-blue-700: oklch(20.83% 0.049 241.35);
   --color-c-blue-800: oklch(18.59% 0.041 238.25);
   --color-c-blue-900: oklch(16.77% 0.036 235.04);
+
+  --animate-c-bg-gradient: gradientAnimation 5s ease-in-out infinite;
+
+  @keyframes gradientAnimation {
+    0% {
+      background-size: 100%;
+      background-position: center;
+    }
+    100% {
+      background-position: center;
+      background-size: 200%
+    }
+  }
 }
+/* background-image: radial-gradient(circle, var(--color-c-blue-100) 50%, var(--color-c-blue-900)); */
 
 @custom-variant dark (&:is(.dark *));
 

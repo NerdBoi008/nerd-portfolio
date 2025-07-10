@@ -5,10 +5,18 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const Navbar = ({ pageHeading }: { pageHeading: string }) => {
+interface NavbarProps {
+  pageHeading: string;
+  className?: string;
+}
+
+const Navbar = ({ 
+  pageHeading,
+  className 
+}: NavbarProps) => {
   const router = useRouter();
   return (
-    <nav className="w-full flex items-center p-5 sticky top-0 z-50 backdrop-blur-xs bg-background/80 border-b border-background/20">
+    <nav className={`w-full flex items-center p-5 sticky top-0 z-50 backdrop-blur-xs bg-background/80 border-b border-background/20 ${className || ""}`} >
       <div className="absolute left-5">
         <Button
           variant={"ghost"}
@@ -25,6 +33,5 @@ const Navbar = ({ pageHeading }: { pageHeading: string }) => {
     </nav>
   );
 };
-
 
 export default Navbar;

@@ -22,8 +22,8 @@ export default function Home() {
         </Link>
       </div>
       <HeroNameComponent />
-      <div className="text-sm text-bg-light-text select-none">
-        Passionate about building cool stuff with code and always learning something new.
+      <div className="text-sm text-bg-light-text select-none px-6">
+        Building cool things & always learning.
       </div>
     </main>
   );

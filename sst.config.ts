@@ -31,7 +31,7 @@ export default $config({
       domain: {
         name: "nerdboi.online",
         dns: false,
-        cert: 'arn:aws:acm:us-east-1:311141549954:certificate/40f1682d-2de6-4536-b9e9-59ae1cd68a1d',
+        cert: 'arn:aws:acm:us-east-1:311141549954:certificate/5ebe531a-276a-49cb-9c72-6a57023cb71d',
       },
     });
 

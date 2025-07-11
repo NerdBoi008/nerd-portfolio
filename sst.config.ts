@@ -29,9 +29,9 @@ export default $config({
 
     const site = new sst.aws.Nextjs("nerdboi-portfolio-site", {
       domain: {
-        name: "nerdboi.online",
+        name: ["nerdboi.online", "www.nerdboi.online"],
         dns: false,
-        cert: 'arn:aws:acm:us-east-1:311141549954:certificate/5ebe531a-276a-49cb-9c72-6a57023cb71d',
+        cert: 'arn:aws:acm:us-east-1:311141549954:certificate/97107248-bb5b-4e09-9fe6-b37735aeea3c',
       },
     });
 

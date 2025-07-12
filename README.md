@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nerdboi Portfolio
 
-## Getting Started
+A modern, animated, full-stack developer portfolio built with [Next.js](https://nextjs.org), [TypeScript](https://www.typescriptlang.org/), [TailwindCSS](https://tailwindcss.com/), and [SST](https://sst.dev/).  
+Live at: [www.nerdboi.online](https://www.nerdboi.online)
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- **Animated Hero & Page Transitions**  
+  Smooth entrance animations using [Framer Motion](https://www.framer.com/motion/).
+- **Galaxy Particle Background**  
+  Subtle, animated star particles powered by [tsParticles](https://particles.js.org/).
+- **Responsive & Accessible**  
+  Fully responsive layout, accessible components, and keyboard navigation.
+- **Project Masonry Grid**  
+  Projects displayed in a responsive masonry layout.
+- **Custom Domain & AWS Hosting**  
+  Deployed with SST on AWS, using a custom domain and SSL.
+- **CI/CD with GitHub Actions**  
+  Automated deployment pipeline.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Project Structure
 
-## Learn More
+- `app/` — Next.js app directory (pages, layout, styles)
+- `components/` — Reusable UI and common components
+- `types/` — TypeScript types
+- `lib/` — Utilities and constants
+- `sst.config.ts` — SST deployment configuration
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧑‍💻 Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project uses [SST](https://sst.dev/) for AWS deployment.
 
-## Deploy on Vercel
+- **Development:**  
+  ```bash
+  npm run deploy:dev
+  ```
+- **Production:**  
+  ```bash
+  npm run deploy:production
+  ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Custom Domain
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The site is deployed to [www.nerdboi.online](https://www.nerdboi.online) using AWS Route53 and CloudFront.  
+To use your own domain, update the `sst.config.ts` accordingly and configure your DNS provider to use the AWS Route53 nameservers.
+
+---
+
+## 📦 Tech Stack
+
+- Next.js
+- TypeScript
+- TailwindCSS
+- Framer Motion
+- tsParticles
+- SST (AWS CDK)
+- Lucide Icons
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+## 🙋‍♂️ Author
+
+**Nerdboi**  
+- [GitHub](https://github.com/nerdboi008)
+- [LinkedIn](https://www.linkedin.com/in/moin-malek/)
+
+---
+
+## 📝 Credits
+
+- [Shadcn/ui](https://ui.shadcn.com/) for UI primitives
+- [Coolors](https://coolors.co/) for the color palette
+
+---

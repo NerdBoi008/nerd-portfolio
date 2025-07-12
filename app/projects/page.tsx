@@ -15,7 +15,7 @@ export default function ProjectsPage() {
         "A personal portfolio website built with Next.js and TailwindCSS",
       technologies: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn/ui"],
       githubUrl: "https://github.com/NerdBoi008/nerd-portfolio",
-      liveUrl: "https://nerdboi.in",
+      liveUrl: "https://www.nerdboi.online",
       imageUrl: "/cdn/nerdboi-portfolio-poster.jpg",
     },
     {
@@ -25,7 +25,7 @@ export default function ProjectsPage() {
         "A full-stack e-commerce application for clothing, featuring product listings, shopping cart, and secure payment integration.",
       technologies: ["Next.js", "Node.js", "PostgreSQL", "RazorPay", "Redux"],
       githubUrl: "https://github.com/NerdBoi008/swadhesi-ecom",
-      liveUrl: "https://swadhesi.com",
+      liveUrl: "https://www.swadhesi.com",
       imageUrl: "/cdn/swadhesi-poster.jpg",
     },
   ];

@@ -3,12 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { Project } from "@/types";
 import { motion } from "framer-motion";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, }}
-      whileInView={{ opacity: 1, }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
       className="bg-c-blue-800 border border-c-blue-500 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
     >
@@ -38,7 +39,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         </div>
 
         <div className="flex gap-4">
-          {project.githubUrl && (
+          {project.githubUrl ? (
             <Link
               href={project.githubUrl}
               target="_blank"
@@ -48,6 +49,17 @@ const ProjectCard = ({ project }: { project: Project }) => {
               <Github size={16} />
               Code
             </Link>
+          ) : (
+            <Tooltip>
+              <TooltipTrigger>
+                <div className="flex gap-2 items-center text-muted-foreground">
+                  <Github size={16} /> Code
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Sorry, This is private repository.</p>
+              </TooltipContent>
+            </Tooltip>
           )}
           {project.liveUrl && (
             <Link

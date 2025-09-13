@@ -24,9 +24,19 @@ export default function ProjectsPage() {
       description:
         "A full-stack e-commerce application for clothing, featuring product listings, shopping cart, and secure payment integration.",
       technologies: ["Next.js", "Node.js", "PostgreSQL", "RazorPay", "Redux"],
-      githubUrl: "https://github.com/NerdBoi008/swadhesi-ecom",
+      githubUrl: "",
       liveUrl: "https://www.swadhesi.com",
       imageUrl: "/cdn/swadhesi-poster.jpg",
+    },
+    {
+      id: 3,
+      title: "[ Fatima-Tuz-zohra ] tours & Travels",
+      description:
+        "A full-stack web-app for booking and tour & travels. Automatically sends emails when customer books a package. CMS for management of bookings, contact message, packages and services on the platform.",
+      technologies: ["Next.js", "MySQL", "Drizzle", "Zustand", "CMS"],
+      githubUrl: "",
+      liveUrl: "https://www.travelbyfz.com",
+      imageUrl: "/cdn/tours-and-travels-poster.png",
     },
   ];
 

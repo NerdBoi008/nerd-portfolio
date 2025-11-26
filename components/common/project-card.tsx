@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Project } from "@/types";
 import { motion } from "framer-motion";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { Badge } from "../ui/badge";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   return (
@@ -11,7 +12,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
-      className="bg-c-blue-800 border border-c-blue-500 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+      className="bg-c-blue-800 border border-c-blue-500 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-muted-foreground hover:scale-99"
     >
       {project.imageUrl && (
         <div className="relative h-48 w-full">
@@ -29,12 +30,9 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
         <div className="flex flex-wrap gap-2 mb-4">
           {project.technologies.map((tech, index) => (
-            <span
-              key={index}
-              className="px-2 py-1 text-xs bg-c-blue-700 rounded-full"
-            >
+            <Badge key={index} className="bg-c-blue-600">
               {tech}
-            </span>
+            </Badge>
           ))}
         </div>
 

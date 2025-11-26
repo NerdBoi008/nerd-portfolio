@@ -27,6 +27,17 @@
       background-size: 200%
     }
   }
+
+  --animate-shine: shine 5s linear infinite;
+  
+  @keyframes shine {
+    0% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: -100%;
+    }
+  }
 }
 /* background-image: radial-gradient(circle, var(--color-c-blue-100) 50%, var(--color-c-blue-900)); */
 

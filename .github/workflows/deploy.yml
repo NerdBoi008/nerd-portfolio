@@ -64,13 +64,10 @@ jobs:
 
       - name: Deploy SST App
         # SST's deploy command will build your Next.js app and then deploy it.
-        # This requires your 'package.json' scripts to have 'deploy:production'
-        # defined as 'npx sst deploy --stage production'.
         run: npm run deploy:production
 
       - name: Invalidate CloudFront Cache
         # This ensures users see the latest version of your site immediately.
-        # Replace 'nerdboi.dev' with your actual custom domain.
         # Ensure your CloudFront distribution is correctly associated with this domain.
         run: |
           DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Aliases.Items!=null && contains(Aliases.Items, '${{ env.CUSTOM_DOMAIN }}')].Id | [0]" --output text)
@@ -81,4 +78,4 @@ jobs:
             aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
           fi
         env:
-          CUSTOM_DOMAIN: nerdboi.dev # <-- Replace with your actual custom domain
+          CUSTOM_DOMAIN: www.nerdboi.online

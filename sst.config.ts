@@ -33,6 +33,17 @@ export default $config({
         dns: false,
         cert: "arn:aws:acm:us-east-1:311141549954:certificate/ea52abb7-b7d8-4c08-991d-e643e143f3c9"
       },
+      // Optimize CDN caching for static assets
+      assets: {
+        // Cache versioned files (JS/CSS with hashes) for 1 year
+        versionedFilesCacheHeader: "public,max-age=31536000,immutable",
+        // Cache non-versioned files for 1 week on CDN, no browser cache
+        nonVersionedFilesCacheHeader: "public,max-age=0,s-maxage=604800,stale-while-revalidate=86400"
+      },
+      // Enable image optimization at edge
+      imageOptimization: {
+        memory: "1024 MB", 
+      },
     });
 
     $output({

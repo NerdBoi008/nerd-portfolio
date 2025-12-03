@@ -6,7 +6,7 @@
 declare module "sst" {
   export interface Resource {
     "nerdboi-portfolio-site": {
-      "type": "sst.aws.Nextjs"
+      "type": "sst.aws.StaticSite"
       "url": string
     }
   }

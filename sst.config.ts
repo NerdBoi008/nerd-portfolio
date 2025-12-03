@@ -27,7 +27,7 @@ export default $config({
       },
     );
 
-    const site = new sst.aws.Nextjs("nerdboi-site", {
+    const site = new sst.aws.Nextjs("nerdboi-portfolio-site", {
       domain: {
         name: "www.nerdboi.online",
         redirects: ["nerdboi.online"],

@@ -40,7 +40,7 @@ const ContactPage = () => {
     <main className="flex-1 flex flex-col items-center justify-center w-full">
       <Navbar pageHeading={"Contact"} />
       <section className="flex flex-1 w-full items-center justify-center p-5">
-        <Card className="bg-c-blue-800 w-96 text-bg-light-text hover:shadow-lg transition-all duration-300">
+        <Card className="backdrop-blur-xs bg-transparent w-96 text-bg-light-text hover:shadow-lg transition-all duration-300">
           <CardHeader>
             <CardTitle className="text-2xl font-bold">
               Let&apos;s Connect!

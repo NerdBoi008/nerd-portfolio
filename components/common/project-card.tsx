@@ -12,7 +12,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
-      className="bg-c-blue-800 border border-c-blue-500 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-muted-foreground hover:scale-99"
+      className="bg-transparent backdrop-blur-xs border border-c-blue-500 rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-muted-foreground hover:scale-99"
     >
       {project.imageUrl && (
         <div className="relative h-48 w-full">

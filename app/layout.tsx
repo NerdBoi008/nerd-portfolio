@@ -42,7 +42,7 @@ export default function RootLayout({
         className={`${fontPrimary.className} antialiased min-h-screen flex flex-col text-white bg-radial from-c-blue-900 from-50% to-c-blue-800`}
       >
         {/* <ParticleBackground/> */}
-        <div className="fixed inset-0 -z-10 opacity-20">
+        <div className="fixed inset-0 -z-10 opacity-40">
             <Particles
               particleColors={["#ffffff", "#ffffff"]}
               particleCount={200}

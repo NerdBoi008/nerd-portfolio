@@ -10,7 +10,7 @@ export const HeroNameComponent = () => {
     <h1
       className={`text-6xl sm:text-8xl md:text-9xl cursor-default select-none ${fontSecondary.className} flex flex-col items-center justify-center text-center leading-tight`}
     >
-      <BlurText text={"Nerdboi008"} animateBy={"letters"} />
+      <BlurText text={"Nerdboi008"} animateBy={"letters"} className="animate-pulse"/>
       <ShinyText
         text="( Moin Malek )"
         disabled={false}

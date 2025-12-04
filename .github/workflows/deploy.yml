@@ -3,8 +3,6 @@ name: Portfolio CI/CD
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
 
 # IMPORTANT: Grant GITHUB_TOKEN extra permissions for OIDC

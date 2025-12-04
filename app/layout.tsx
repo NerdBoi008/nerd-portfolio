@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { fontPrimary } from "./fonts";
 import "./globals.css";
-import { ParticleBackground } from "@/components/common/particles-background";
+import Particles from "@/components/common/particles";
 
 export const metadata: Metadata = {
   title: "Nerdboi | Full-Stack Developer Portfolio",
@@ -41,7 +41,19 @@ export default function RootLayout({
       <body
         className={`${fontPrimary.className} antialiased min-h-screen flex flex-col text-white bg-radial from-c-blue-900 from-50% to-c-blue-800`}
       >
-        <ParticleBackground/>
+        {/* <ParticleBackground/> */}
+        <div className="fixed inset-0 -z-10 opacity-20">
+            <Particles
+              particleColors={["#ffffff", "#ffffff"]}
+              particleCount={200}
+              particleSpread={10}
+              speed={0.1}
+              particleBaseSize={100}
+              moveParticlesOnHover
+              alphaParticles={false}
+              disableRotation={false}
+            />
+          </div>
         {children}
       </body>
     </html>

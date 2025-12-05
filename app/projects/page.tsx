@@ -3,7 +3,6 @@
 import Navbar from "@/components/common/navbar";
 import ProjectCard from "@/components/common/project-card";
 import { Project } from "@/types";
-import React from "react";
 import Masonry from "react-masonry-css";
 
 export default function ProjectsPage() {
